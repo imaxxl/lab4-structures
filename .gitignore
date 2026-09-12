@@ -1,0 +1,22 @@
+# Каталоги сборки (отчёты покрытия в репозитории оставляем)
+build/
+build-*/
+CMakeUserPresets.json
+
+# Промежуточные файлы покрытия
+*.gcda
+*.gcno
+coverage.raw.info
+coverage.info
+
+# Python
+__pycache__/
+*.pyc
+.python-version
+python/.coverage
+python/.pytest_cache/
+
+# Прочее
+.DS_Store
+Thumbs.db
+*.swp
