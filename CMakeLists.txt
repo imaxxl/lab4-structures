@@ -7,5 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Библиотека со структурами данных (стек, очередь, дерево).
 add_library(lab4_structures
     src/stack.cpp
+    src/queue.cpp
 )
 target_include_directories(lab4_structures PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
