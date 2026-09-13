@@ -59,17 +59,17 @@ BinarySearchTree<T>::eraseRecursive(Node* node, const T& key) {
         return node;
     }
 
-    // Узел найден.
+    // Узел найден, удаляем его.
     Node* old = node;
     if (node->left == nullptr || node->right == nullptr) {
-        // 0 или 1 потомок: заменяем узел его (единственным) поддеревом.
+        // лист или один потомок: заменяем узел его поддеревом
         node = (node->left != nullptr) ? node->left : node->right;
         delete old;
         return node;
     }
 
-    // Два потомка: копируем ключ инордер-продолжателя
-    // (минимальный ключ правого поддерева) и удаляем продолжателя.
+    // Два потомка: меняем ключ на минимум правого поддерева
+    // (инордер-продолжатель) и удаляем продолжателя
     Node* successor = node->right;
     while (successor->left != nullptr) {
         successor = successor->left;
