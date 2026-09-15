@@ -78,7 +78,7 @@ TEST(QueueTest, Clear) {
 TEST(QueueTest, WrapAroundAndGrowth) {
     Queue<int> q(3);
     for (int i = 1; i <= 5; ++i) {
-        q.enqueue(i);  // переполнение буфера, расширение
+        q.enqueue(i);  // переполнение: буфер расширяется
     }
     for (int i = 1; i <= 3; ++i) {
         q.dequeue();  // сдвиг "головы"
