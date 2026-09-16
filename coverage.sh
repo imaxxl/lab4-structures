@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Сборка с покрытием, запуск тестов и HTML-отчёт (lcov + genhtml).
+# Сборка с покрытием, запуск тестов и генерация HTML-отчёта (lcov + genhtml).
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -16,9 +16,12 @@ cmake --build "$BUILD_DIR" -j"$(nproc)"
 # Запускаем тесты (они покрывают структуру данных).
 ./"$BUILD_DIR/lab4_tests"
 
-lcov --capture --directory "$BUILD_DIR" --output-file coverage.raw.info
+lcov --capture --directory "$BUILD_DIR" --output-file coverage.raw.info \
+     --rc geninfo_unexecuted_blocks=1 \
+     --ignore-errors inconsistent,mismatch
 lcov --remove coverage.raw.info '/usr/*' '*/_deps/*' \
-     --output-file coverage.info
+     --output-file coverage.info \
+     --ignore-errors inconsistent,mismatch
 genhtml coverage.info --output-directory coverage
 
 echo "Готово. Отчёт: $(pwd)/coverage/index.html"
