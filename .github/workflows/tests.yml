@@ -1,0 +1,32 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Debug -DLAB4_BUILD_TESTS=ON
+          cmake --build build -j
+      - name: Run tests
+        run: ./build/lab4_tests
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install pytest pytest-cov
+      - name: Run tests
+        run: |
+          cd python
+          python -m pytest tests -v --cov=stack --cov-report=term-missing
